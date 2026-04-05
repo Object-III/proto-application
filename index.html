@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Object III Prototype</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <main class="screen-stack">
+      <section id="tab-home" class="tab-panel active" data-tab="home">
+        <header class="top-hero">
+          <div class="identity-row">
+            <div class="guild-badge">G</div>
+            <div class="identity-copy">
+              <p id="team-level-label" class="meta-copy"></p>
+              <h1 id="team-name"></h1>
+            </div>
+            <button id="team-switch" class="icon-button" type="button" aria-label="チーム切替">↺</button>
+          </div>
+
+          <div class="resource-row">
+            <div class="energy-chip warning"><span>⚡</span><strong id="energy-text"></strong></div>
+            <div class="energy-chip"><span>⚔</span><strong id="durability-text"></strong></div>
+            <button class="icon-button" type="button" aria-label="通知">◌</button>
+            <button class="icon-button" type="button" aria-label="メニュー">☰</button>
+          </div>
+        </header>
+
+        <section class="home-card castle-card">
+          <div class="card-heading">
+            <div>
+              <p class="meta-copy">Castle Overview</p>
+              <h2>拠点ステータス</h2>
+            </div>
+            <button id="mail-button" class="mail-trigger" type="button">
+              Mail
+              <span id="mail-count" class="mail-count"></span>
+            </button>
+          </div>
+
+          <div class="progress-strip">
+            <div class="progress-copy">
+              <span>Level Progress</span>
+              <strong id="xp-text"></strong>
+            </div>
+            <div class="xp-meter">
+              <div id="xp-fill" class="xp-fill"></div>
+            </div>
+          </div>
+
+          <div class="castle-stage">
+            <div class="castle-glow"></div>
+            <img class="castle-image" src="./画像_アカテン試作/バーチャル安土城_透過.png" alt="城のイメージ" />
+            <button class="castle-hotspot hotspot-top" data-part="top" type="button">天守</button>
+            <button class="castle-hotspot hotspot-weapon1" data-part="weapon1" type="button">武器1</button>
+            <button class="castle-hotspot hotspot-weapon2" data-part="weapon2" type="button">武器2</button>
+            <button class="castle-hotspot hotspot-weapon3" data-part="weapon3" type="button">武器3</button>
+            <button class="castle-hotspot hotspot-base" data-part="base" type="button">土台</button>
+          </div>
+
+          <div class="detail-panel">
+            <div class="card-heading">
+              <div>
+                <p class="meta-copy">Selected Part</p>
+                <h3 id="detail-title"></h3>
+              </div>
+              <span id="detail-tag" class="detail-tag"></span>
+            </div>
+            <div id="part-detail" class="detail-grid"></div>
+          </div>
+        </section>
+
+        <section class="home-card member-card">
+          <div class="card-heading">
+            <div>
+              <p class="meta-copy">Team Members</p>
+              <h2>メンバー状態</h2>
+            </div>
+          </div>
+          <div id="member-list" class="member-list"></div>
+        </section>
+
+        <section id="mail-panel" class="home-card hidden">
+          <div class="card-heading">
+            <div>
+              <p class="meta-copy">Mailbox</p>
+              <h2>通知一覧</h2>
+            </div>
+            <button id="close-mail" class="pill-button" type="button">閉じる</button>
+          </div>
+          <div id="mail-list" class="member-list"></div>
+        </section>
+      </section>
+
+      <section id="tab-map" class="tab-panel" data-tab="map">
+        <header class="map-header">
+          <div>
+            <p class="meta-copy">World Cube</p>
+            <h2>3×3×6 立方体盤面</h2>
+          </div>
+          <div class="map-actions">
+            <button id="center-on-team" class="pill-button" type="button">自拠点へ</button>
+            <button id="rotate-left" class="round-button" type="button">↺</button>
+            <button id="rotate-right" class="round-button" type="button">↻</button>
+          </div>
+        </header>
+
+        <section class="map-card">
+          <div class="map-note-row">
+            <p class="map-note">ドラッグで立方体を回転できます。8チームはランダム配置のダミー表示です。</p>
+            <div class="legend-row">
+              <span><i class="legend-dot self"></i>自チーム</span>
+              <span><i class="legend-dot enemy"></i>敵</span>
+              <span><i class="legend-dot buff"></i>バフ</span>
+            </div>
+          </div>
+
+          <div id="cube-viewport" class="cube-viewport">
+            <div id="cube-stage" class="cube-stage-3d">
+              <div id="cube-3d" class="cube-3d">
+                <section class="cube-face cube-face-top" data-face="top">
+                  <div class="face-title">TOP</div>
+                  <div id="face-top" class="face-grid"></div>
+                </section>
+                <section class="cube-face cube-face-bottom" data-face="bottom">
+                  <div class="face-title">BOTTOM</div>
+                  <div id="face-bottom" class="face-grid"></div>
+                </section>
+                <section class="cube-face cube-face-front" data-face="front">
+                  <div class="face-title">FRONT</div>
+                  <div id="face-front" class="face-grid"></div>
+                </section>
+                <section class="cube-face cube-face-back" data-face="back">
+                  <div class="face-title">BACK</div>
+                  <div id="face-back" class="face-grid"></div>
+                </section>
+                <section class="cube-face cube-face-left" data-face="left">
+                  <div class="face-title">LEFT</div>
+                  <div id="face-left" class="face-grid"></div>
+                </section>
+                <section class="cube-face cube-face-right" data-face="right">
+                  <div class="face-title">RIGHT</div>
+                  <div id="face-right" class="face-grid"></div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="cell-detail" class="map-detail"></section>
+      </section>
+
+      <section id="tab-craft" class="tab-panel" data-tab="craft">
+        <header class="section-heading">
+          <div>
+            <p class="meta-copy">Forge</p>
+            <h2>武器進化ルート</h2>
+          </div>
+        </header>
+        <section class="sub-card skill-tree-card">
+          <div id="skill-tree" class="skill-tree-grid"></div>
+        </section>
+        <aside id="recipe-panel" class="sub-card"></aside>
+      </section>
+
+      <section id="tab-board" class="tab-panel" data-tab="board">
+        <header class="section-heading">
+          <div>
+            <p class="meta-copy">Board</p>
+            <h2>掲示板</h2>
+          </div>
+          <button id="new-post" class="pill-button" type="button">新規投稿</button>
+        </header>
+        <p id="board-note" class="map-note"></p>
+        <section id="board-list" class="member-list"></section>
+        <div class="pager">
+          <button data-page="latest" type="button">最新</button>
+          <button data-page="next" type="button">次</button>
+          <button data-page="prev" type="button">前</button>
+          <button data-page="oldest" type="button">最古</button>
+        </div>
+      </section>
+
+      <section id="tab-report" class="tab-panel" data-tab="report">
+        <header class="section-heading">
+          <div>
+            <p class="meta-copy">Reports</p>
+            <h2>報告フォーム</h2>
+          </div>
+        </header>
+        <nav id="report-nav" class="segmented-nav"></nav>
+        <form id="report-form" class="sub-card form-card"></form>
+      </section>
+    </main>
+
+    <nav id="bottom-nav" class="bottom-nav">
+      <button class="nav-button active" data-target="home" type="button">
+        <span class="nav-icon">⌂</span>
+        <span>拠点</span>
+      </button>
+      <button class="nav-button" data-target="map" type="button">
+        <span class="nav-icon">▣</span>
+        <span>世界</span>
+      </button>
+      <button class="nav-button" data-target="craft" type="button">
+        <span class="nav-icon">✦</span>
+        <span>合成</span>
+      </button>
+      <button class="nav-button" data-target="board" type="button">
+        <span class="nav-icon">☷</span>
+        <span>掲示板</span>
+      </button>
+      <button class="nav-button" data-target="report" type="button">
+        <span class="nav-icon">✓</span>
+        <span>報告</span>
+      </button>
+    </nav>
+  </div>
+
+  <dialog id="post-dialog" class="post-dialog">
+    <form id="post-form" class="sub-card form-card post-form" method="dialog">
+      <header class="section-heading">
+        <div>
+          <p class="meta-copy">New Post</p>
+          <h2>掲示板に投稿</h2>
+        </div>
+      </header>
+      <label>題名<input name="title" required /></label>
+      <label>名前<input name="author" /></label>
+      <label>本文<textarea name="body" rows="5" required></textarea></label>
+      <label>画像<input name="image" type="file" accept="image/*" /></label>
+      <div class="dialog-actions">
+        <button id="cancel-post" class="pill-button" type="button">キャンセル</button>
+        <button class="primary-button" type="submit">投稿</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

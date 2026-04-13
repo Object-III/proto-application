@@ -1,0 +1,46 @@
+<a href="$bbsurl" style="text-decoration:none;">
+<h1 align="center">
+<img src="https://bbs1.sekkaku.net/bbs/upfile/objectIII--1775548478-1408-768.png" alt="競技しりとり" border="0" width="320" style="max-width:90%; height:auto;">
+</h1>
+</a>
+<div align="center" style="color:#FFFFFF;">
+<form name="f2" method="post" action="//bbs1.sekkaku.net/bbs/objectIII/">
+<input type="text" name="search" id="searchBox" size="30">
+<input type="submit" value="検索">
+<input type="hidden" name="mode" value="search">
+<input type="hidden" name="id" value="objectIII">
+<br><br>
+<label style="color:#FFFFFF;">
+<input type="radio" name="report_filter" value="襲撃報告" onclick="toggleSearchRadio(this)">襲撃報告
+</label>
+&nbsp;
+<label style="color:#FFFFFF;">
+<input type="radio" name="report_filter" value="スポット達成" onclick="toggleSearchRadio(this)">スポット達成
+</label>
+&nbsp;
+<label style="color:#FFFFFF;">
+<input type="radio" name="report_filter" value="ミッション達成" onclick="toggleSearchRadio(this)">ミッション達成
+</label>
+</form>
+<br>
+<font color="#ADADAD"><count></font><br><br>
+<font color="#ADADAD">今日<today> 昨日<yesterday></font><br>
+<p align="center"><a href="https://janken-hissyou.com/katikata/">必勝法</a></p>
+<p align="center"><a href="https://bbs1.sekkaku.net/bbs/objectIII/mode=rank">投稿数ランキング</a></p>
+</div>
+<script type="text/javascript">
+var lastCheckedRadio = null;
+function toggleSearchRadio(radio) {
+  var searchBox = document.getElementById("searchBox");
+  if (lastCheckedRadio === radio) {
+    radio.checked = false;
+    lastCheckedRadio = null;
+    if (searchBox.value === radio.value) {
+      searchBox.value = "";
+    }
+  } else {
+    lastCheckedRadio = radio;
+    searchBox.value = radio.value;
+  }
+}
+</script>

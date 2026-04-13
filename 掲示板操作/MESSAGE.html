@@ -1,0 +1,49 @@
+<p style="font-size:115%;">
+<font color="#FFFFFF">[$lot]</font>
+<font color="#3F9877"> 題名：</font><font color="#3F9877">$sub</font>
+<font color="#3F9877"> 名前：</font><font color="#3F9877">$name</font>
+<font size="2" color="#FFFFFF">$date_year年$date_mon月$date_day日($date_week2) $date_hour:$date_min:$date_sec</font>
+</p>
+<blockquote>
+<p style="font-size:115%;"><script type="text/javascript">
+<!--
+var textColor = "$op1";
+if (textColor == "") {
+  textColor = "#FFFFFF";
+}
+document.write('<font color="' + textColor + '">$mes<\\/font>');
+// -->
+</script></p>
+<script type="text/javascript">
+<!--
+var IMG = "$icon";
+var size_w = "$size_w";
+var size_h = "$size_h";
+function open$lot() {
+var wwidth = $size_w + 45;
+var wheight = $size_h + 30;
+window.open("", "$lot", "width=" + wwidth + ",height=" + wheight + ",scrollbars=yes");
+}
+document.write('<div>');
+if (IMG != "") {
+document.write('<div style="text-align:center;">');
+document.write('<a href="'+IMG+'" target="$lot" onClick="open$lot()">');
+document.write('<img src="'+IMG+'" border="0" width="300" alt="IMG" style="margin-top:30px; display:inline;">');
+document.write('<\\/a>');
+document.write('<\\/div>');
+}
+document.write('<\\/div>');
+// -->
+</script>
+</blockquote>
+<div align="right" style="font-size:105%; color:#FFFFFF; margin-bottom:1em;">
+<a href="$bbsurl/mode=vote&vote1=$lot"><img src="https://bbs1.sekkaku.net/bbs/upfile/objectIII--1775550876-259-157.png" alt="非常に満足" width="24" height="20" border="0"></a><font color="#FFFFFF">($vote1)</font>
+&nbsp;
+<a href="$bbsurl/mode=vote&vote2=$lot"><img src="https://bbs1.sekkaku.net/bbs/upfile/objectIII--1775550919-255-155.png" alt="満足" width="24" height="20" border="0"></a><font color="#FFFFFF">($vote2)</font>
+&nbsp;
+<a href="$bbsurl/mode=vote&vote3=$lot"><img src="https://bbs1.sekkaku.net/bbs/upfile/objectIII--1775550942-252-154.png" alt="ふつう" width="24" height="20" border="0"></a><font color="#FFFFFF">($vote3)</font>
+&nbsp;
+<a href="$bbsurl/mode=vote&vote4=$lot"><img src="https://bbs1.sekkaku.net/bbs/upfile/objectIII--1775550963-248-151.png" alt="不満" width="24" height="20" border="0"></a><font color="#FFFFFF">($vote4)</font>
+&nbsp;
+<a href="$bbsurl/mode=vote&vote5=$lot"><img src="https://bbs1.sekkaku.net/bbs/upfile/objectIII--1775550979-253-155.png" alt="非常に不満" width="24" height="20" border="0"></a><font color="#FFFFFF">($vote5)</font>
+</div>

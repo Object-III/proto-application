@@ -1,0 +1,114 @@
+<div style="width:92%; max-width:620px; margin:0 auto 18px auto; padding:18px 18px 14px 18px; background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)); border:1px solid rgba(255,255,255,0.14); border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.35); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);">
+<table class="maintables" style="color:#FFFFFF; margin:0 auto;">
+<tr>
+<td nowrap style="color:#FFFFFF; font-size:115%;">名前</td>
+<td>
+<input type="text" name="name" size="60" class="maintables">
+<input type="checkbox" name="ccheck" checked style="display:none;">
+</td>
+</tr>
+<tr>
+<td nowrap valign="top" style="color:#FFFFFF; font-size:115%; padding-top:2px;">題名</td>
+<td>
+<input type="text" name="sub" id="subjectBox" size="60" class="maintables">
+<div style="margin-top:8px; color:#FFFFFF; font-size:105%;">
+<label style="color:#FFFFFF;">
+<input type="radio" name="subject_filter" value="襲撃報告" onclick="toggleSubjectRadio(this)">襲撃報告
+</label>
+&nbsp;
+<label style="color:#FFFFFF;">
+<input type="radio" name="subject_filter" value="スポット達成" onclick="toggleSubjectRadio(this)">スポット達成
+</label>
+<br>
+<label style="color:#FFFFFF;">
+<input type="radio" name="subject_filter" value="ミッション達成" onclick="toggleSubjectRadio(this)">ミッション達成
+</label>
+</div>
+</td>
+</tr>
+<tr>
+<td nowrap style="color:#FFFFFF; font-size:115%;">内容</td>
+<td><textarea cols="60" rows="4" name="mes" class="maintables"></textarea></td>
+</tr>
+<tr>
+<td nowrap style="color:#FFFFFF; font-size:115%;">画像</td>
+<td><input type="file" name="file" size="50" class="maintables"></td>
+</tr>
+<tr>
+<td nowrap style="color:#FFFFFF; font-size:115%;">文字</td>
+<td style="color:#FFFFFF; font-size:100%;">
+<input type="radio" name="op1" value="#FF3131"><font color="#FF3131">赤</font>
+&nbsp;&nbsp;
+<input type="radio" name="op1" value="#00CBFF"><font color="#00CBFF">青</font>
+&nbsp;&nbsp;
+<input type="radio" name="op1" value="#00DD00"><font color="#00DD00">緑</font>
+&nbsp;&nbsp;
+<input type="radio" name="op1" value="#FFFF00"><font color="#FFFF00">黄</font>
+<br>
+<input type="radio" name="op1" value="#FF8C00"><font color="#FF8C00">橙</font>
+&nbsp;&nbsp;
+<input type="radio" name="op1" value="#A64DFF"><font color="#A64DFF">紫</font>
+&nbsp;&nbsp;
+<input type="radio" name="op1" value="#FF4BCB"><font color="#FF4BCB">桃</font>
+&nbsp;&nbsp;
+<input type="radio" name="op1" value="#FFFFFF" checked><font color="#FFFFFF">白</font>
+<br>
+<input type="radio" name="op1" value="#A0D8EF"><font color="#A0D8EF">空</font>
+&nbsp;&nbsp;
+<input type="radio" name="op1" value="#FDEEEF"><font color="#FDEEEF">桜</font>
+&nbsp;&nbsp;
+<input type="radio" name="op1" value="#CA0048"><font color="#CA0048">紅</font>
+&nbsp;&nbsp;
+<input type="radio" name="op1" value="#E94709"><font color="#E94709">朱</font>
+<br>
+<input type="radio" name="op1" value="#7B8D41"><font color="#7B8D41">草</font>
+&nbsp;&nbsp;
+<input type="radio" name="op1" value="#FCD475"><font color="#FCD475">卵</font>
+&nbsp;&nbsp;
+<input type="radio" name="op1" value="#BBB7DA"><font color="#BBB7DA">藤</font>
+&nbsp;&nbsp;
+<input type="radio" name="op1" value="#949495"><font color="#949495">鼠</font>
+<br>
+<input type="radio" name="op1" value="#4E67B0"><font color="#4E67B0">群青</font>
+&nbsp;&nbsp;
+<input type="radio" name="op1" value="#317270"><font color="#317270">納戸</font>
+&nbsp;&nbsp;
+<input type="radio" name="op1" value="#F4B4CC"><font color="#F4B4CC">撫子</font>
+&nbsp;&nbsp;
+<input type="radio" name="op1" value="#B94047"><font color="#B94047">臙脂</font>
+<br>
+<input type="radio" name="op1" value="#D0E2BE"><font color="#D0E2BE">若緑</font>
+&nbsp;&nbsp;
+<input type="radio" name="op1" value="#898B65"><font color="#898B65">麹塵</font>
+&nbsp;&nbsp;
+<input type="radio" name="op1" value="#715C1E"><font color="#715C1E">鶯茶</font>
+&nbsp;&nbsp;
+<input type="radio" name="op1" value="#6B5146"><font color="#6B5146">煤竹</font>
+</td>
+</tr>
+<tr>
+<td nowrap style="color:#FFFFFF;"></td>
+<td align="right">
+<input type="submit" onclick="mmsg();" value="投稿">
+</td>
+</tr>
+</table>
+</div>
+<div>&nbsp;</div>
+<hr size="2">
+<script type="text/javascript">
+var lastCheckedSubjectRadio = null;
+function toggleSubjectRadio(radio) {
+  var subjectBox = document.getElementById("subjectBox");
+  if (lastCheckedSubjectRadio === radio) {
+    radio.checked = false;
+    lastCheckedSubjectRadio = null;
+    if (subjectBox.value === radio.value) {
+      subjectBox.value = "";
+    }
+  } else {
+    lastCheckedSubjectRadio = radio;
+    subjectBox.value = radio.value;
+  }
+}
+</script>

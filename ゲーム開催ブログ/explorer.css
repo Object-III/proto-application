@@ -82,6 +82,10 @@ button {
   place-items: center;
 }
 
+.toolbar-nav:disabled {
+  opacity: 0.35;
+}
+
 .toolbar-nav svg {
   width: 21px;
   height: 21px;
@@ -216,6 +220,12 @@ button {
   text-align: left;
 }
 
+.sidebar-folder-icon {
+  width: 19px;
+  height: auto;
+  flex: none;
+}
+
 .content-pane {
   background: #ffffff;
   padding: 14px 18px 18px 0;
@@ -256,12 +266,14 @@ button {
 
 .file-tile {
   width: 94px;
-  height: 96px;
+  min-height: 122px;
   padding: 0;
   border: none;
   background: transparent;
   display: grid;
-  place-items: start center;
+  justify-items: center;
+  align-content: start;
+  gap: 8px;
 }
 
 .sprite-poster {
@@ -289,6 +301,12 @@ button {
 .doc-thumb {
   width: 82px;
   height: 82px;
+}
+
+.file-label {
+  font-size: 15px;
+  line-height: 1.2;
+  text-align: center;
 }
 
 .preview-pane {

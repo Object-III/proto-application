@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>開催予告</title>
+  <link rel="stylesheet" href="./explorer.css" />
+</head>
+<body>
+  <main class="desktop">
+    <section class="finder-window" aria-label="エクスプローラー画面">
+      <header class="window-toolbar">
+        <div class="toolbar-left">
+          <button id="back-button" class="toolbar-nav" type="button" aria-label="戻る">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14.5 5.5 8 12l6.5 6.5" />
+            </svg>
+          </button>
+          <button class="toolbar-nav" type="button" aria-label="進む">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M9.5 5.5 16 12l-6.5 6.5" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="toolbar-title">開催予告</div>
+
+        <div class="toolbar-right" aria-hidden="true">
+          <span class="toolbar-glyph list-view">
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+          </span>
+          <span class="toolbar-glyph grid-view">
+            <span></span><span></span><span></span><span></span>
+          </span>
+          <span class="toolbar-glyph share"></span>
+          <span class="toolbar-glyph tag"></span>
+          <span class="toolbar-glyph more">•••</span>
+          <span class="toolbar-glyph search"></span>
+        </div>
+      </header>
+
+      <div class="window-body">
+        <aside class="sidebar">
+          <button id="sidebar-folder" class="sidebar-item active" type="button">
+            <span>📁開催予告</span>
+          </button>
+        </aside>
+
+        <section class="content-pane">
+          <div id="folder-view" class="pane-view active">
+            <button id="open-folder" class="folder-tile" type="button" aria-label="開催予告フォルダを開く">
+              <img class="folder-photo" src="./ディレクトリのアイコン.png" alt="" />
+            </button>
+          </div>
+
+          <div id="file-view" class="pane-view">
+            <div class="file-grid">
+              <button id="open-festival-file" class="file-tile image-file" type="button" data-preview="./アイコン_2大開催祭チラシ.jpg" aria-label="大開催祭チラシ">
+                <img class="file-photo poster-thumb" src="./アイコン_2大開催祭チラシ.jpg" alt="" />
+              </button>
+
+              <button id="open-witness-file" class="file-tile image-file" type="button" data-preview="./アイコン1_開催予告目撃.png" aria-label="開催予告目撃">
+                <img class="file-photo poster-thumb witness-thumb" src="./アイコン1_開催予告目撃.png" alt="" />
+              </button>
+
+              <button class="file-tile image-file" type="button" data-kind="placeholder" aria-label="文書">
+                <img class="file-photo doc-thumb" src="./アイコン3_文書アイコン.png" alt="" />
+              </button>
+
+              <button class="file-tile image-file" type="button" data-kind="placeholder" aria-label="文書">
+                <img class="file-photo doc-thumb" src="./アイコン3_文書アイコン.png" alt="" />
+              </button>
+            </div>
+          </div>
+
+          <div id="preview-view" class="pane-view preview-pane">
+            <div class="preview-wrap">
+              <img id="preview-image" class="preview-image" src="./アイコン_2大開催祭チラシ.jpg" alt="開催予告画像" />
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="./explorer.js"></script>
+</body>
+</html>

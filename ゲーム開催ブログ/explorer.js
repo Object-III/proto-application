@@ -9,68 +9,74 @@ const fileView = document.getElementById("file-view");
 const previewView = document.getElementById("preview-view");
 const previewImage = document.getElementById("preview-image");
 
-const historyStack = ["folder"];
-const forwardStack = [];
-let currentView = "folder";
+const previewMap = {
+  festival: {
+    src: "./アイコン_2大開催祭チラシ.jpg",
+    alt: "大開催祭チラシ",
+  },
+  witness: {
+    src: "./アイコン1_開催予告目撃.png",
+    alt: "開催予告目撃",
+  },
+};
 
-function setActiveView(viewName) {
-  folderView.classList.toggle("active", viewName === "folder");
-  fileView.classList.toggle("active", viewName === "files");
-  previewView.classList.toggle("active", viewName === "preview");
-  currentView = viewName;
+const historyStack = [{ type: "folder" }];
+const forwardStack = [];
+let currentState = historyStack[0];
+
+function applyState(state) {
+  folderView.classList.toggle("active", state.type === "folder");
+  fileView.classList.toggle("active", state.type === "files");
+  previewView.classList.toggle("active", state.type === "preview");
+
+  if (state.type === "preview") {
+    const preview = previewMap[state.previewKey];
+    if (preview) {
+      previewImage.src = preview.src;
+      previewImage.alt = preview.alt;
+    }
+  }
+
+  currentState = state;
   backButton.disabled = historyStack.length <= 1;
   forwardButton.disabled = forwardStack.length === 0;
 }
 
-function navigateTo(viewName) {
-  if (currentView === viewName) return;
-  historyStack.push(viewName);
+function isSameState(a, b) {
+  return a.type === b.type && a.previewKey === b.previewKey;
+}
+
+function navigateTo(nextState) {
+  if (isSameState(currentState, nextState)) return;
+  historyStack.push(nextState);
   forwardStack.length = 0;
-  setActiveView(viewName);
-}
-
-function showFolderView() {
-  navigateTo("folder");
-}
-
-function showFileView() {
-  navigateTo("files");
-}
-
-function showPreviewView() {
-  navigateTo("preview");
-}
-
-function openPreviewFromButton(button) {
-  previewImage.src = button.dataset.preview;
-  previewImage.alt = button.getAttribute("aria-label") || "開催予告画像";
-  showPreviewView();
+  applyState(nextState);
 }
 
 function goBack() {
   if (historyStack.length <= 1) return;
   const current = historyStack.pop();
   forwardStack.push(current);
-  setActiveView(historyStack[historyStack.length - 1]);
+  applyState(historyStack[historyStack.length - 1]);
 }
 
 function goForward() {
   if (forwardStack.length === 0) return;
   const next = forwardStack.pop();
   historyStack.push(next);
-  setActiveView(next);
+  applyState(next);
 }
 
-openFolderButton.addEventListener("click", showFileView);
-openFestivalFileButton.addEventListener("click", () => openPreviewFromButton(openFestivalFileButton));
-openWitnessFileButton.addEventListener("click", () => openPreviewFromButton(openWitnessFileButton));
+openFolderButton.addEventListener("click", () => navigateTo({ type: "files" }));
+openFestivalFileButton.addEventListener("click", () => navigateTo({ type: "preview", previewKey: "festival" }));
+openWitnessFileButton.addEventListener("click", () => navigateTo({ type: "preview", previewKey: "witness" }));
+sidebarFolderButton.addEventListener("click", () => navigateTo({ type: "folder" }));
 backButton.addEventListener("click", goBack);
 forwardButton.addEventListener("click", goForward);
-sidebarFolderButton.addEventListener("click", showFolderView);
 
 if (window.location.hash === "#open") {
-  historyStack.push("files");
-  setActiveView("files");
+  historyStack.push({ type: "files" });
+  applyState(historyStack[historyStack.length - 1]);
 } else {
-  setActiveView("folder");
+  applyState(historyStack[0]);
 }

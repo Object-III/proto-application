@@ -221,9 +221,10 @@ button {
 }
 
 .sidebar-folder-icon {
-  width: 19px;
-  height: auto;
+  width: 1em;
+  height: 1em;
   flex: none;
+  object-fit: contain;
 }
 
 .content-pane {
@@ -391,6 +392,10 @@ button {
 
   .sidebar {
     padding: 14px 18px 0;
+  }
+
+  .sidebar-item {
+    font-size: 1.05rem;
   }
 
   .content-pane {

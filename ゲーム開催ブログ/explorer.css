@@ -250,12 +250,21 @@ button {
   border: none;
   background: transparent;
   padding: 0;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
 }
 
 .folder-photo {
   display: block;
   width: 92px;
   height: auto;
+}
+
+.folder-label {
+  font-size: 15px;
+  line-height: 1.2;
+  text-align: center;
 }
 
 .file-grid {

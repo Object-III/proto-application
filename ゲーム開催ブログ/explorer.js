@@ -3,6 +3,7 @@ const forwardButton = document.getElementById("forward-button");
 const openFolderButton = document.getElementById("open-folder");
 const openFestivalFileButton = document.getElementById("open-festival-file");
 const openWitnessFileButton = document.getElementById("open-witness-file");
+const openScpFileButton = document.getElementById("open-scp-file");
 const sidebarFolderButton = document.getElementById("sidebar-folder");
 const folderView = document.getElementById("folder-view");
 const fileView = document.getElementById("file-view");
@@ -11,12 +12,16 @@ const previewImage = document.getElementById("preview-image");
 
 const previewMap = {
   festival: {
-    src: "./アイコン_2大開催祭チラシ.jpg",
+    src: "./アイコン_2大開催祭チラシ.png",
     alt: "大開催祭チラシ",
   },
   witness: {
     src: "./アイコン1_開催予告目撃.png",
     alt: "開催予告目撃",
+  },
+  scp: {
+    src: "./アイコン3_SCP.png",
+    alt: "SCP文書",
   },
 };
 
@@ -70,6 +75,7 @@ function goForward() {
 openFolderButton.addEventListener("click", () => navigateTo({ type: "files" }));
 openFestivalFileButton.addEventListener("click", () => navigateTo({ type: "preview", previewKey: "festival" }));
 openWitnessFileButton.addEventListener("click", () => navigateTo({ type: "preview", previewKey: "witness" }));
+openScpFileButton.addEventListener("click", () => navigateTo({ type: "preview", previewKey: "scp" }));
 sidebarFolderButton.addEventListener("click", () => navigateTo({ type: "folder" }));
 backButton.addEventListener("click", goBack);
 forwardButton.addEventListener("click", goForward);

@@ -35,9 +35,9 @@
       font-family: "Yu Gothic", "Hiragino Sans", "Meiryo", sans-serif;
       color: #24150c;
       background:
-        radial-gradient(circle at 20% 20%, rgba(117, 63, 32, 0.2), transparent 30%),
-        radial-gradient(circle at 80% 12%, rgba(239, 173, 104, 0.1), transparent 28%),
-        linear-gradient(180deg, #2f180f 0%, #24120d 100%);
+        radial-gradient(circle at 20% 18%, rgba(120, 58, 25, 0.14), transparent 26%),
+        radial-gradient(circle at 82% 10%, rgba(180, 108, 56, 0.07), transparent 24%),
+        linear-gradient(180deg, #1c0d08 0%, #120805 100%);
     }
 
     .stage {
@@ -53,14 +53,14 @@
       padding: clamp(18px, 1.5vw, 24px);
       border: 1px solid rgba(255, 255, 255, 0.08);
       background:
-        linear-gradient(135deg, rgba(255, 227, 191, 0.1), transparent 30%),
-        linear-gradient(315deg, rgba(74, 26, 5, 0.5), transparent 35%),
-        linear-gradient(180deg, var(--wood-light) 0%, var(--wood-mid) 38%, #6d3616 100%);
+        linear-gradient(135deg, rgba(255, 227, 191, 0.06), transparent 30%),
+        linear-gradient(315deg, rgba(50, 18, 4, 0.58), transparent 35%),
+        linear-gradient(180deg, #a86436 0%, #733816 38%, #4d220d 100%);
       box-shadow:
-        inset 0 1px 0 rgba(255, 245, 232, 0.3),
-        inset 0 -6px 10px rgba(55, 24, 10, 0.35),
-        0 0 0 20px rgba(98, 45, 17, 0.16),
-        var(--board-shadow);
+        inset 0 1px 0 rgba(255, 245, 232, 0.18),
+        inset 0 -10px 16px rgba(23, 9, 3, 0.44),
+        0 0 0 20px rgba(55, 21, 7, 0.2),
+        0 40px 110px rgba(0, 0, 0, 0.48);
     }
 
     .board-frame::before {
@@ -77,16 +77,16 @@
       height: 100%;
       overflow: hidden;
       background:
-        linear-gradient(180deg, rgba(255, 240, 223, 0.08), rgba(71, 35, 13, 0.14)),
-        radial-gradient(circle at 15% 18%, rgba(255, 236, 205, 0.18), transparent 20%),
-        radial-gradient(circle at 82% 74%, rgba(110, 59, 27, 0.12), transparent 22%),
+        linear-gradient(180deg, rgba(255, 240, 223, 0.03), rgba(37, 16, 7, 0.28)),
+        radial-gradient(circle at 15% 18%, rgba(255, 236, 205, 0.1), transparent 20%),
+        radial-gradient(circle at 82% 74%, rgba(44, 19, 8, 0.2), transparent 22%),
         url("./コルクボード.jpg");
       background-size: auto, auto, auto, cover;
       background-position: center;
       box-shadow:
-        inset 0 0 32px rgba(77, 33, 11, 0.16),
-        inset 0 2px 2px rgba(255, 249, 243, 0.15),
-        inset 0 -10px 26px rgba(74, 34, 13, 0.12);
+        inset 0 0 40px rgba(24, 10, 4, 0.28),
+        inset 0 2px 2px rgba(255, 249, 243, 0.08),
+        inset 0 -22px 36px rgba(26, 11, 4, 0.24);
       isolation: isolate;
     }
 
@@ -99,18 +99,18 @@
     }
 
     .board::before {
-      opacity: 0.24;
+      opacity: 0.36;
       mix-blend-mode: multiply;
       background:
-        radial-gradient(circle at 8% 12%, rgba(255, 255, 255, 0.28), transparent 13%),
-        radial-gradient(circle at 72% 26%, rgba(255, 255, 255, 0.14), transparent 11%),
-        repeating-linear-gradient(115deg, rgba(74, 49, 31, 0.1) 0 2px, transparent 2px 8px);
+        radial-gradient(circle at 8% 12%, rgba(255, 255, 255, 0.16), transparent 13%),
+        radial-gradient(circle at 72% 26%, rgba(255, 255, 255, 0.08), transparent 11%),
+        repeating-linear-gradient(115deg, rgba(53, 31, 18, 0.16) 0 2px, transparent 2px 8px);
     }
 
     .board::after {
       background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.1), transparent 14%, transparent 82%, rgba(74, 34, 13, 0.1)),
-        linear-gradient(90deg, rgba(69, 28, 10, 0.08), transparent 12%, transparent 88%, rgba(69, 28, 10, 0.08));
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 14%, transparent 78%, rgba(24, 11, 4, 0.18)),
+        linear-gradient(90deg, rgba(29, 12, 5, 0.16), transparent 12%, transparent 88%, rgba(29, 12, 5, 0.16));
     }
 
     .paper {
@@ -122,13 +122,13 @@
       cursor: pointer;
       color: inherit;
       text-decoration: none;
-      filter: drop-shadow(0 10px 16px rgba(34, 16, 5, 0.14));
+      filter: drop-shadow(0 14px 20px rgba(11, 5, 2, 0.28));
       transition: transform 220ms ease, filter 220ms ease;
     }
 
     .paper:hover {
       transform: translateY(-4px) scale(1.01);
-      filter: drop-shadow(0 18px 22px rgba(34, 16, 5, 0.2));
+      filter: drop-shadow(0 22px 28px rgba(7, 3, 1, 0.36));
     }
 
     .paper::before {
@@ -170,7 +170,7 @@
       object-fit: contain;
       position: relative;
       z-index: 1;
-      box-shadow: 0 10px 22px rgba(40, 19, 7, 0.24);
+      box-shadow: 0 14px 26px rgba(13, 6, 2, 0.34);
     }
 
     .witness {
@@ -201,11 +201,11 @@
       min-width: 150px;
       max-width: 220px;
       background:
-        linear-gradient(180deg, rgba(255, 250, 214, 0.98), rgba(241, 223, 129, 0.96));
+        linear-gradient(180deg, rgba(237, 221, 152, 0.94), rgba(201, 174, 84, 0.94));
       border: 1px solid rgba(149, 121, 43, 0.16);
       box-shadow:
-        0 12px 24px rgba(70, 40, 14, 0.18),
-        inset 0 1px 0 rgba(255, 255, 255, 0.65);
+        0 16px 28px rgba(21, 10, 3, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.42);
       font-size: clamp(12px, 0.9vw, 14px);
       line-height: 1.6;
       color: #5d4215;
@@ -365,50 +365,44 @@
 
       .stage {
         width: 100vw;
-        aspect-ratio: auto;
-        min-height: 100vh;
+        aspect-ratio: 16 / 9;
+        min-height: auto;
         padding: 0;
       }
 
       .board-frame {
-        padding: 14px;
+        padding: 10px;
       }
 
       .board {
-        min-height: 100vh;
+        min-height: 0;
       }
 
-      .witness,
-      .festival,
-      .scp {
-        position: relative;
-        left: auto;
-        right: auto;
-        top: auto;
-        width: min(88%, 420px);
-        margin: 24px auto 0;
-        transform: none;
+      .note {
+        font-size: 10px;
+        min-width: 104px;
+        max-width: 138px;
+        padding: 12px 12px 13px;
       }
 
-      .festival {
-        margin-top: 18px;
+      .note::after {
+        width: 24px;
+        height: 24px;
       }
 
-      .scp {
-        margin-top: 20px;
+      .paper::before {
+        width: 14px;
+        height: 14px;
+        top: 2px;
       }
 
-      .note,
+      .paper::after {
+        top: 14px;
+        height: 9px;
+      }
+
       .string {
-        display: none;
-      }
-
-      .paper:first-of-type {
-        margin-top: 36px;
-      }
-
-      .paper:last-of-type {
-        margin-bottom: 36px;
+        border-top-width: 1px;
       }
     }
   </style>

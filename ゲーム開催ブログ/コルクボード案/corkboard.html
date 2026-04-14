@@ -6,15 +6,11 @@
   <title>コルクボード案</title>
   <style>
     :root {
-      --wood-dark: #4b2412;
-      --wood-mid: #8e4a1f;
-      --wood-light: #cb8452;
-      --board-shadow: 0 32px 90px rgba(0, 0, 0, 0.38);
-      --paper-shadow: 0 14px 24px rgba(48, 23, 8, 0.26), 0 3px 6px rgba(48, 23, 8, 0.18);
+      --board-base-width: 1500px;
+      --board-ratio: calc(9 / 16);
       --pin-red: #b11117;
       --pin-highlight: #ff8185;
       --pin-metal: #f7dbc7;
-      --paper: #f7f1e7;
     }
 
     * {
@@ -33,15 +29,18 @@
       place-items: center;
       overflow-x: hidden;
       font-family: "Yu Gothic", "Hiragino Sans", "Meiryo", sans-serif;
-      color: #24150c;
       background:
         radial-gradient(circle at 20% 18%, rgba(120, 58, 25, 0.14), transparent 26%),
         radial-gradient(circle at 82% 10%, rgba(180, 108, 56, 0.07), transparent 24%),
         linear-gradient(180deg, #1c0d08 0%, #120805 100%);
     }
 
+    .stage-shell {
+      width: min(var(--board-base-width), calc(100vw - 32px));
+    }
+
     .stage {
-      width: min(1500px, calc(100vw - 32px));
+      width: min(var(--board-base-width), calc(100vw - 32px));
       aspect-ratio: 16 / 9;
       padding: clamp(18px, 1.8vw, 28px);
     }
@@ -120,14 +119,11 @@
       border: none;
       background: transparent;
       cursor: pointer;
-      color: inherit;
-      text-decoration: none;
       filter: drop-shadow(0 14px 20px rgba(11, 5, 2, 0.28));
       transition: transform 220ms ease, filter 220ms ease;
     }
 
     .paper:hover {
-      transform: translateY(-4px) scale(1.01);
       filter: drop-shadow(0 22px 28px rgba(7, 3, 1, 0.36));
     }
 
@@ -168,8 +164,6 @@
       width: 100%;
       height: auto;
       object-fit: contain;
-      position: relative;
-      z-index: 1;
       box-shadow: 0 14px 26px rgba(13, 6, 2, 0.34);
     }
 
@@ -200,8 +194,7 @@
       padding: 15px 16px 16px;
       min-width: 150px;
       max-width: 220px;
-      background:
-        linear-gradient(180deg, rgba(237, 221, 152, 0.94), rgba(201, 174, 84, 0.94));
+      background: linear-gradient(180deg, rgba(237, 221, 152, 0.94), rgba(201, 174, 84, 0.94));
       border: 1px solid rgba(149, 121, 43, 0.16);
       box-shadow:
         0 16px 28px rgba(21, 10, 3, 0.28),
@@ -209,7 +202,6 @@
       font-size: clamp(12px, 0.9vw, 14px);
       line-height: 1.6;
       color: #5d4215;
-      transform-origin: top center;
     }
 
     .note::before {
@@ -310,145 +302,76 @@
       object-fit: contain;
     }
 
-    @media (max-width: 980px) {
-      .stage {
-        width: min(100vw - 16px, 1100px);
-        aspect-ratio: 4 / 5;
-        padding: 8px;
-      }
-
-      .witness {
-        left: 8%;
-        top: 8%;
-        width: 34%;
-      }
-
-      .festival {
-        left: 30%;
-        top: 22%;
-        width: 42%;
-      }
-
-      .scp {
-        right: 8%;
-        top: 9%;
-        width: 27%;
-      }
-
-      .note-a {
-        left: 8%;
-        bottom: 18%;
-      }
-
-      .note-b {
-        right: 6%;
-        bottom: 17%;
-      }
-
-      .string-a {
-        left: 32%;
-        top: 28%;
-        width: 10%;
-      }
-
-      .string-b {
-        left: 63%;
-        top: 31%;
-        width: 10%;
-      }
-    }
-
     @media (max-width: 640px) {
+      :root {
+        --mobile-stage-width: calc(100vw - 8px);
+        --mobile-scale: calc(var(--mobile-stage-width) / var(--board-base-width));
+      }
+
       body {
         place-items: start center;
       }
 
+      .stage-shell {
+        width: var(--mobile-stage-width);
+        height: calc(var(--board-base-width) * var(--board-ratio) * var(--mobile-scale));
+      }
+
       .stage {
-        width: 100vw;
-        aspect-ratio: 16 / 9;
-        min-height: auto;
+        width: var(--board-base-width);
         padding: 0;
-      }
-
-      .board-frame {
-        padding: 10px;
-      }
-
-      .board {
-        min-height: 0;
-      }
-
-      .note {
-        font-size: 10px;
-        min-width: 104px;
-        max-width: 138px;
-        padding: 12px 12px 13px;
-      }
-
-      .note::after {
-        width: 24px;
-        height: 24px;
-      }
-
-      .paper::before {
-        width: 14px;
-        height: 14px;
-        top: 2px;
-      }
-
-      .paper::after {
-        top: 14px;
-        height: 9px;
-      }
-
-      .string {
-        border-top-width: 1px;
+        transform: scale(var(--mobile-scale));
+        transform-origin: top left;
       }
     }
   </style>
 </head>
 <body>
-  <main class="stage">
-    <section class="board-frame">
-      <div class="board" aria-label="コルクボード型開催予告">
-        <div class="string string-a" aria-hidden="true"></div>
-        <div class="string string-b" aria-hidden="true"></div>
+  <main class="stage-shell">
+    <div class="stage">
+      <section class="board-frame">
+        <div class="board" aria-label="コルクボード型開催予告">
+          <div class="string string-a" aria-hidden="true"></div>
+          <div class="string string-b" aria-hidden="true"></div>
 
-        <button class="paper witness" type="button" data-image="../アイコン1_開催予告目撃.png" data-alt="開催予告目撃の記事画像" aria-label="開催予告目撃">
-          <img src="../アイコン1_開催予告目撃.png" alt="開催予告目撃の記事画像" />
-        </button>
+          <button class="paper witness" type="button" data-image="../アイコン1_開催予告目撃.png" data-alt="開催予告目撃の記事画像" aria-label="開催予告目撃">
+            <img src="../アイコン1_開催予告目撃.png" alt="開催予告目撃の記事画像" />
+          </button>
 
-        <button class="paper festival" type="button" data-image="../アイコン_2大開催祭チラシ.png" data-alt="大開催祭のチラシ画像" aria-label="大開催祭チラシ">
-          <img src="../アイコン_2大開催祭チラシ.png" alt="大開催祭のチラシ画像" />
-        </button>
+          <button class="paper festival" type="button" data-image="../アイコン_2大開催祭チラシ.png" data-alt="大開催祭のチラシ画像" aria-label="大開催祭チラシ">
+            <img src="../アイコン_2大開催祭チラシ.png" alt="大開催祭のチラシ画像" />
+          </button>
 
-        <button class="paper scp" type="button" data-image="../アイコン3_SCP.png" data-alt="SCP風の開催予告資料" aria-label="SCP資料">
-          <img src="../アイコン3_SCP.png" alt="SCP風の開催予告資料" />
-        </button>
+          <button class="paper scp" type="button" data-image="../アイコン3_SCP.png" data-alt="SCP風の開催予告資料" aria-label="SCP資料">
+            <img src="../アイコン3_SCP.png" alt="SCP風の開催予告資料" />
+          </button>
 
-        <aside class="note note-a" aria-label="メモ">
-          目撃証言
-          <br />
-          町のあちこちに
-          <br />
-          「開催」の気配あり
-        </aside>
+          <aside class="note note-a" aria-label="メモ">
+            目撃証言
+            <br />
+            町のあちこちに
+            <br />
+            「開催」の気配あり
+          </aside>
 
-        <aside class="note note-b" aria-label="メモ">
-          回収優先
-          <br />
-          チラシと資料は
-          <br />
-          別角度で保管
-        </aside>
-      </div>
-    </section>
+          <aside class="note note-b" aria-label="メモ">
+            回収優先
+            <br />
+            チラシと資料は
+            <br />
+            別角度で保管
+          </aside>
+        </div>
+      </section>
+    </div>
   </main>
+
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <div class="lightbox-panel">
       <img class="lightbox-image" id="lightbox-image" src="" alt="" />
     </div>
   </div>
+
   <script>
     const papers = document.querySelectorAll(".paper[data-image]");
     const lightbox = document.getElementById("lightbox");

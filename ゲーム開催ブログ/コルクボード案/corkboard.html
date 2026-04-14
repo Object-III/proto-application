@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>コルクボード案</title>
+  <style>
+    :root {
+      --wood-dark: #4b2412;
+      --wood-mid: #8e4a1f;
+      --wood-light: #cb8452;
+      --board-shadow: 0 32px 90px rgba(0, 0, 0, 0.38);
+      --paper-shadow: 0 14px 24px rgba(48, 23, 8, 0.26), 0 3px 6px rgba(48, 23, 8, 0.18);
+      --pin-red: #b11117;
+      --pin-highlight: #ff8185;
+      --pin-metal: #f7dbc7;
+      --paper: #f7f1e7;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      overflow-x: hidden;
+      font-family: "Yu Gothic", "Hiragino Sans", "Meiryo", sans-serif;
+      color: #24150c;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(117, 63, 32, 0.2), transparent 30%),
+        radial-gradient(circle at 80% 12%, rgba(239, 173, 104, 0.1), transparent 28%),
+        linear-gradient(180deg, #2f180f 0%, #24120d 100%);
+    }
+
+    .stage {
+      width: min(1500px, calc(100vw - 32px));
+      aspect-ratio: 16 / 9;
+      padding: clamp(18px, 1.8vw, 28px);
+    }
+
+    .board-frame {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      padding: clamp(18px, 1.5vw, 24px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        linear-gradient(135deg, rgba(255, 227, 191, 0.1), transparent 30%),
+        linear-gradient(315deg, rgba(74, 26, 5, 0.5), transparent 35%),
+        linear-gradient(180deg, var(--wood-light) 0%, var(--wood-mid) 38%, #6d3616 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 245, 232, 0.3),
+        inset 0 -6px 10px rgba(55, 24, 10, 0.35),
+        0 0 0 20px rgba(98, 45, 17, 0.16),
+        var(--board-shadow);
+    }
+
+    .board-frame::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border: 1px solid rgba(255, 239, 220, 0.16);
+      pointer-events: none;
+    }
+
+    .board {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255, 240, 223, 0.08), rgba(71, 35, 13, 0.14)),
+        radial-gradient(circle at 15% 18%, rgba(255, 236, 205, 0.18), transparent 20%),
+        radial-gradient(circle at 82% 74%, rgba(110, 59, 27, 0.12), transparent 22%),
+        url("./コルクボード.jpg");
+      background-size: auto, auto, auto, cover;
+      background-position: center;
+      box-shadow:
+        inset 0 0 32px rgba(77, 33, 11, 0.16),
+        inset 0 2px 2px rgba(255, 249, 243, 0.15),
+        inset 0 -10px 26px rgba(74, 34, 13, 0.12);
+      isolation: isolate;
+    }
+
+    .board::before,
+    .board::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .board::before {
+      opacity: 0.24;
+      mix-blend-mode: multiply;
+      background:
+        radial-gradient(circle at 8% 12%, rgba(255, 255, 255, 0.28), transparent 13%),
+        radial-gradient(circle at 72% 26%, rgba(255, 255, 255, 0.14), transparent 11%),
+        repeating-linear-gradient(115deg, rgba(74, 49, 31, 0.1) 0 2px, transparent 2px 8px);
+    }
+
+    .board::after {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.1), transparent 14%, transparent 82%, rgba(74, 34, 13, 0.1)),
+        linear-gradient(90deg, rgba(69, 28, 10, 0.08), transparent 12%, transparent 88%, rgba(69, 28, 10, 0.08));
+    }
+
+    .paper {
+      position: absolute;
+      display: block;
+      padding: 0;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: inherit;
+      text-decoration: none;
+      filter: drop-shadow(0 10px 16px rgba(34, 16, 5, 0.14));
+      transition: transform 220ms ease, filter 220ms ease;
+    }
+
+    .paper:hover {
+      transform: translateY(-4px) scale(1.01);
+      filter: drop-shadow(0 18px 22px rgba(34, 16, 5, 0.2));
+    }
+
+    .paper::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 4px;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      background:
+        radial-gradient(circle at 34% 30%, var(--pin-highlight) 0 18%, transparent 19%),
+        radial-gradient(circle at 40% 38%, #df3438 0 35%, var(--pin-red) 36% 72%, #7c0910 73% 100%);
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.45),
+        0 3px 6px rgba(0, 0, 0, 0.22);
+      z-index: 3;
+    }
+
+    .paper::after {
+      content: "";
+      position: absolute;
+      left: calc(50% - 1px);
+      top: 18px;
+      width: 3px;
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), var(--pin-metal) 40%, #8b6e61 100%);
+      transform: rotate(6deg);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+      z-index: 2;
+    }
+
+    .paper img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 10px 22px rgba(40, 19, 7, 0.24);
+    }
+
+    .witness {
+      left: 13%;
+      top: 15%;
+      width: 23%;
+      transform: rotate(-7deg);
+    }
+
+    .festival {
+      left: 39%;
+      top: 9%;
+      width: 35%;
+      transform: rotate(2.5deg);
+      z-index: 2;
+    }
+
+    .scp {
+      right: 11%;
+      top: 17%;
+      width: 20%;
+      transform: rotate(8deg);
+    }
+
+    .note {
+      position: absolute;
+      padding: 15px 16px 16px;
+      min-width: 150px;
+      max-width: 220px;
+      background:
+        linear-gradient(180deg, rgba(255, 250, 214, 0.98), rgba(241, 223, 129, 0.96));
+      border: 1px solid rgba(149, 121, 43, 0.16);
+      box-shadow:
+        0 12px 24px rgba(70, 40, 14, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.65);
+      font-size: clamp(12px, 0.9vw, 14px);
+      line-height: 1.6;
+      color: #5d4215;
+      transform-origin: top center;
+    }
+
+    .note::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 5px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      background:
+        radial-gradient(circle at 35% 35%, #fff7ef 0 16%, transparent 17%),
+        radial-gradient(circle at 40% 40%, #d93236 0 34%, #a4090e 35% 100%);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .note::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, rgba(162, 129, 40, 0.18), rgba(255, 243, 200, 0.85) 58%);
+      clip-path: polygon(100% 0, 0 100%, 100% 100%);
+      box-shadow: -2px -2px 4px rgba(120, 86, 24, 0.1);
+    }
+
+    .note-a {
+      left: 10%;
+      bottom: 12%;
+      transform: rotate(-3deg);
+    }
+
+    .note-b {
+      right: 8%;
+      bottom: 11%;
+      transform: rotate(4deg);
+    }
+
+    .string {
+      position: absolute;
+      border-top: 2px dashed rgba(176, 48, 45, 0.55);
+      opacity: 0.85;
+      transform-origin: left center;
+    }
+
+    .string-a {
+      left: 33%;
+      top: 32%;
+      width: 12%;
+      transform: rotate(-12deg);
+    }
+
+    .string-b {
+      left: 67%;
+      top: 32%;
+      width: 10%;
+      transform: rotate(16deg);
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      background: rgba(16, 8, 4, 0.74);
+      backdrop-filter: blur(5px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 180ms ease;
+      z-index: 20;
+    }
+
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox-panel {
+      position: relative;
+      max-width: min(1200px, 92vw);
+      max-height: 88vh;
+      padding: 16px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(255, 251, 247, 0.98), rgba(235, 225, 213, 0.96));
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+    }
+
+    .lightbox-image {
+      display: block;
+      max-width: 100%;
+      max-height: calc(88vh - 32px);
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    @media (max-width: 980px) {
+      .stage {
+        width: min(100vw - 16px, 1100px);
+        aspect-ratio: 4 / 5;
+        padding: 8px;
+      }
+
+      .witness {
+        left: 8%;
+        top: 8%;
+        width: 34%;
+      }
+
+      .festival {
+        left: 30%;
+        top: 22%;
+        width: 42%;
+      }
+
+      .scp {
+        right: 8%;
+        top: 9%;
+        width: 27%;
+      }
+
+      .note-a {
+        left: 8%;
+        bottom: 18%;
+      }
+
+      .note-b {
+        right: 6%;
+        bottom: 17%;
+      }
+
+      .string-a {
+        left: 32%;
+        top: 28%;
+        width: 10%;
+      }
+
+      .string-b {
+        left: 63%;
+        top: 31%;
+        width: 10%;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        place-items: start center;
+      }
+
+      .stage {
+        width: 100vw;
+        aspect-ratio: auto;
+        min-height: 100vh;
+        padding: 0;
+      }
+
+      .board-frame {
+        padding: 14px;
+      }
+
+      .board {
+        min-height: 100vh;
+      }
+
+      .witness,
+      .festival,
+      .scp {
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        width: min(88%, 420px);
+        margin: 24px auto 0;
+        transform: none;
+      }
+
+      .festival {
+        margin-top: 18px;
+      }
+
+      .scp {
+        margin-top: 20px;
+      }
+
+      .note,
+      .string {
+        display: none;
+      }
+
+      .paper:first-of-type {
+        margin-top: 36px;
+      }
+
+      .paper:last-of-type {
+        margin-bottom: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="stage">
+    <section class="board-frame">
+      <div class="board" aria-label="コルクボード型開催予告">
+        <div class="string string-a" aria-hidden="true"></div>
+        <div class="string string-b" aria-hidden="true"></div>
+
+        <button class="paper witness" type="button" data-image="../アイコン1_開催予告目撃.png" data-alt="開催予告目撃の記事画像" aria-label="開催予告目撃">
+          <img src="../アイコン1_開催予告目撃.png" alt="開催予告目撃の記事画像" />
+        </button>
+
+        <button class="paper festival" type="button" data-image="../アイコン_2大開催祭チラシ.png" data-alt="大開催祭のチラシ画像" aria-label="大開催祭チラシ">
+          <img src="../アイコン_2大開催祭チラシ.png" alt="大開催祭のチラシ画像" />
+        </button>
+
+        <button class="paper scp" type="button" data-image="../アイコン3_SCP.png" data-alt="SCP風の開催予告資料" aria-label="SCP資料">
+          <img src="../アイコン3_SCP.png" alt="SCP風の開催予告資料" />
+        </button>
+
+        <aside class="note note-a" aria-label="メモ">
+          目撃証言
+          <br />
+          町のあちこちに
+          <br />
+          「開催」の気配あり
+        </aside>
+
+        <aside class="note note-b" aria-label="メモ">
+          回収優先
+          <br />
+          チラシと資料は
+          <br />
+          別角度で保管
+        </aside>
+      </div>
+    </section>
+  </main>
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-panel">
+      <img class="lightbox-image" id="lightbox-image" src="" alt="" />
+    </div>
+  </div>
+  <script>
+    const papers = document.querySelectorAll(".paper[data-image]");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightbox-image");
+
+    const closeLightbox = () => {
+      lightbox.classList.remove("open");
+      lightbox.setAttribute("aria-hidden", "true");
+      lightboxImage.src = "";
+      lightboxImage.alt = "";
+    };
+
+    papers.forEach((paper) => {
+      paper.addEventListener("click", () => {
+        lightboxImage.src = paper.dataset.image;
+        lightboxImage.alt = paper.dataset.alt || "";
+        lightbox.classList.add("open");
+        lightbox.setAttribute("aria-hidden", "false");
+      });
+    });
+
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox || event.target === lightboxImage.parentElement) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && lightbox.classList.contains("open")) {
+        closeLightbox();
+      }
+    });
+  </script>
+</body>
+</html>
